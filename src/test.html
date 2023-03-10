@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Skidbot cmd_vel</title>
+  <meta charset="utf-8">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/1.2.0/base64.min.js"
+    integrity="sha512-wuN7AU4m/qE3ZCKOCoBIuTU4M/dK8w8becOGgb4geNwPDm69wwu1AqZut6awol/qllGfyySmSoQ2CRwJADXKOA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/1.2.0/base64.js"
+    integrity="sha512-H56QX+J/AJYBRERMrlj37tVOJUmTY3KbBut+hWULZFmCO8KAkYhXU0ssLOLeU37e8TYCTDHeOl8PhkS7lfNO/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/base64-js@1.5.1/base64js.min.js "></script>
+</head>
+
+<body>
+  <h1>Skidbot cmd_vel</h1>
+  <div id="message"></div>
+  <canvas id="canvas_image"></canvas>
+  <div id="image" src="">
+
+
+    <script>
+
+
+      const socket = io();
+
+      socket.on('message', (data) => {
+        const message = document.getElementById('message');
+        if (typeof data === 'string') {
+          message.innerHTML = data;
+        } else {
+          message.innerHTML = `Linear: ${data.linear.x}, ${data.linear.y}, ${data.linear.z}<br>Angular: ${data.angular.x}, ${data.angular.y}, ${data.angular.z}`;
+        }
+      });
+
+
+
+          
+
+      socket.on('image', (message) => {
+        console.log(message)
+        const can = document.createElement("canvas");
+        can.width = message.width;
+        can.height = message.height;
+        const ctx = can.getContext("2d");
+
+        const imgData = ctx.createImageData(message.width, message.height);
+        const data = imgData.data;
+
+        for (let i = 0; i < message.data.length; i += 3) {
+          data[i] = message.data[i];
+          data[i + 1] = message.data[i + 1];
+          data[i + 2] = message.data[i + 2];
+          data[i + 3] = 255;
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+
+        const oldcan = document.getElementsByTagName("canvas");
+        if (oldcan && oldcan.length > 0) {
+          document.body.replaceChild(can, oldcan[0]);
+        } else {
+          document.body.appendChild(can);
+        }
+      });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+
+- run brigdge
+ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+
+
+- open another terminal
+
+move all file in src folder to :
+~/gcamp_ros2_ws/src/ros2-web-bridge/examples
+
+-cmd
+cd ~/gcamp_ros2_ws/src/ros2-web-bridge/examples
+node test_socket.js
+
+p/s: no bao thieu cai gi thi cai cai do .
