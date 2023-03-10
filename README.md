@@ -11,6 +11,7 @@
 3. Clone and install dependencies
     Note that a ROS 2 installation has to be sourced before installing dependencies.
     ```bash
+    $ cd ~/gcamp_ros2_ws/src
     $ git clone https://github.com/RobotWebTools/ros2-web-bridge.git
     $ sudo apt-get install ros-foxy-rosbridge-server
     $ cd ros2-web-bridge
