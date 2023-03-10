@@ -1,6 +1,6 @@
 ![Screenshot from 2023-03-10 14-04-55](https://user-images.githubusercontent.com/78076796/224268310-14275973-fcce-44d7-9070-931d4a30dc50.png)
 
-## Install
+## Install (should install node in nvm)
 
 1. Prepare for ROS 2
     Please reference the [documentation](https://index.ros.org/doc/ros2/Installation/) to install ROS 2.
